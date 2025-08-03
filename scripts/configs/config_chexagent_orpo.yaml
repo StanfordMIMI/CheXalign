@@ -1,0 +1,39 @@
+# Model arguments
+model_name_or_path: StanfordAIMI/CheXagent-2-3b
+torch_dtype: float16
+
+# Data training arguments
+dataset_mixer:
+  interpret-cxr-structured-mimic-green: 1.0
+dataset_splits:
+- train
+
+# Training arguments with sensible defaults
+bf16: true
+beta: 0.1 
+do_train: true
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: False
+preprocessing_num_workers: 12
+
+learning_rate: 1.0e-6
+logging_steps: 1
+lr_scheduler_type: cosine 
+max_prompt_length: 1024
+max_length: 2048
+num_train_epochs: 1
+optim: adamw_torch
+output_dir: results/CheXagent-2-3b-orpo-offline
+per_device_train_batch_size:  4
+per_device_eval_batch_size: 4
+save_strategy: "steps"
+save_steps: 5000
+save_total_limit: 20
+seed: 42
+warmup_ratio: 0.1 
+trust_remote_code: True
+report_to: "wandb"
+push_to_hub: False
+use_flash_attention_2 : True
